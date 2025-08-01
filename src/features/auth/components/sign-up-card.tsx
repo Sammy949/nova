@@ -24,16 +24,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
-
-const formSchema = z.object({
-  name: z.string().trim().min(1, "Required"),
-  email: z.email(),
-  password: z.string().min(8, "Minimum of 8 characters Required"),
-});
+import { registerSchema } from "../schemas";
+import { useRegister } from "../api/use-register";
 
 const SignUpCard = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { mutate } = useRegister();
+
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -41,8 +39,8 @@ const SignUpCard = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = (values: z.infer<typeof registerSchema>) => {
+    mutate({ json: values });
   };
   return (
     <Card className="w-full h-full md:w-[487px] border-none shadow-none">
