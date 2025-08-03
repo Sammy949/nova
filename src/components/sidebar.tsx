@@ -10,7 +10,7 @@ const Sidebar = () => {
         <Image src="/logo.svg" alt="logo" width={40} height={20} />
         <h1 className="font-bold text-2xl">Nova</h1>
       </Link>
-      <DottedSeparator style="normal" className="my-4" />
+      <DottedSeparator className="my-4" />
       <Navigation />
     </aside>
   );
