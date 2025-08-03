@@ -7,6 +7,7 @@ interface DottedSeparatorProps {
   dotSize?: string;
   gapSize?: string;
   direction?: "horizontal" | "vertical";
+  style?: "dot" | "normal";
 }
 
 const DottedSeparator = ({
@@ -16,8 +17,28 @@ const DottedSeparator = ({
   dotSize = "2px",
   gapSize = "6px",
   direction = "horizontal",
+  style = "dot",
 }: DottedSeparatorProps) => {
   const isHorizontal = direction === "horizontal";
+  const isNormal = style === "normal";
+
+  const sharedStyles = {
+    width: isHorizontal ? "100%" : height,
+    height: isHorizontal ? height : "100%",
+  };
+
+  const dotStyles = {
+    backgroundImage: `radial-gradient(circle, ${color} 25%, transparent 25%)`,
+    backgroundSize: isHorizontal
+      ? `${parseInt(dotSize) + parseInt(gapSize)}px ${dotSize}`
+      : `${height} ${parseInt(dotSize) + parseInt(gapSize)}px`,
+    backgroundRepeat: isHorizontal ? "repeat-x" : "repeat-y",
+    backgroundPosition: "center",
+  };
+
+  const normalStyles = {
+    backgroundColor: color,
+  };
 
   return (
     <div
@@ -31,17 +52,12 @@ const DottedSeparator = ({
       <div
         className={isHorizontal ? "flex-grow" : "flex-grow-0"}
         style={{
-          width: isHorizontal ? "100%" : height,
-          height: isHorizontal ? height : "100%",
-          backgroundImage: `radial-gradient(circle, ${color} 25%, transparent 25%)`,
-          backgroundSize: isHorizontal
-            ? `${parseInt(dotSize) + parseInt(gapSize)}px ${dotSize}`
-            : `${height} ${parseInt(dotSize) + parseInt(gapSize)}px`,
-          backgroundRepeat: isHorizontal ? "repeat-x" : "repeat-y",
-          backgroundPosition: "center",
+          ...sharedStyles,
+          ...(isNormal ? normalStyles : dotStyles),
         }}
       />
     </div>
   );
 };
+
 export default DottedSeparator;
