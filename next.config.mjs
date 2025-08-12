@@ -1,13 +1,16 @@
-
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
-	// ...existing config...
-	images: {
-		domains: [
-			'fra.cloud.appwrite.io',
-			// add other domains if needed
-		],
-	},
+  // ...existing config...
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "fra.cloud.appwrite.io",
+        pathname: "/v1/storage/buckets/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

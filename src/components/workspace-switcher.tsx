@@ -23,21 +23,25 @@ const WorkspaceSwitcher = () => {
         <RiAddCircleFill className="size-5 text-neutral-500 cursor-pointer hover:opacity-75 transition" />
       </div>
       <Select>
-        <SelectTrigger className="w-full bg-neutral-200 font-medium pl-0 py-0">
+        <SelectTrigger className="w-full bg-neutral-200 font-medium p-2">
           <SelectValue placeholder="No workspace selected" />
         </SelectTrigger>
         <SelectContent>
-          {workspaces?.documents.map((workspace) => (
-            <SelectItem key={workspace.$id} value={workspace.$id}>
-              <div className="flex justify-start items-center gap-3 font-medium">
-                <WorkspaceAvatar
-                  name={workspace.name}
-                  image={workspace.imageUrl}
-                />
-                <span className="truncate">{workspace.name}</span>
-              </div>
-            </SelectItem>
-          ))}
+          {workspaces?.documents ? (
+            workspaces?.documents.map((workspace) => (
+              <SelectItem key={workspace.$id} value={workspace.$id}>
+                <div className="flex justify-start items-center gap-3 font-medium">
+                  <WorkspaceAvatar
+                    name={workspace.name}
+                    image={workspace.imageUrl}
+                  />
+                  <span className="truncate">{workspace.name}</span>
+                </div>
+              </SelectItem>
+            ))
+          ) : (
+            <p className="text-xs">No workspaces available</p>
+          )}
         </SelectContent>
       </Select>
     </div>
