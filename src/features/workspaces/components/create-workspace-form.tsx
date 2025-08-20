@@ -24,6 +24,7 @@ import Image from "next/image";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ImageIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 interface CreateWorkspaceFormProps {
   onCancel?: () => void;
@@ -158,6 +159,7 @@ const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                 variant={"secondary"}
                 onClick={onCancel}
                 disabled={isPending}
+                className={cn(!onCancel && "invisible")}
               >
                 Cancel
               </Button>
