@@ -23,7 +23,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useConfirm } from "@/hooks/use-confirm";
-import { toast } from "sonner";
 
 const MembersList = () => {
   const workspaceId = useWorkspaceId();
